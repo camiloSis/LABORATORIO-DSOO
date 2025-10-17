@@ -1,10 +1,89 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class avance{
 
     public static void main(String[] args) {
 
+    Scanner sc = new Scanner (System.in);
+
+    Sistema biblioteca = new Sistema();
+    biblioteca.inicializarDatos();
     
+    System.out.println(" ESTADO INICIAL DEL SISTEMA DE BIBLIOTECA");
+
+    System.out.println("\n--> Libros Registrados y su estado (disponible/no disponible)");
+    biblioteca.mostrarLibros();
+    
+    System.out.println("\n--> Préstamos Activos Iniciales");
+    biblioteca.mostrarPrestamosActivos();
+
+    testeo(biblioteca); //llama al metodo testeo para hacer las pruebas
+
+    // Ahora hacemos el menu 
+    int opcion;
+
+    //usamos do-while para que al menos ejecute el menú 1 vez
+    do{
+            System.out.println("\n *** MENÚ BIBLIOTECA *** ");
+            System.out.println("1. Ver libros");
+            System.out.println("2. Prestar libro");
+            System.out.println("3. Devolver libro");
+            System.out.println("4. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch(opcion){
+                case 1: biblioteca.mostrarLibros(); 
+
+                     break;
+
+                case 2: 
+
+                    System.out.print("Ingrese su ID de usuario: ");
+                    String idUsuario = sc.nextLine();
+                    System.out.print("Ingrese el ISBN del libro a prestar: ");
+                    String isbn = sc.nextLine();
+                    if (biblioteca.prestarLibro(idUsuario, isbn) == true){
+                        System.out.println("Préstamo exitoso.");
+                    } else {
+                        System.out.println("No se pudo realizar el préstamo. Verifique disponibilidad o datos.");
+                    }
+                
+                    break;
+
+                case 3: 
+
+                    System.out.print("Ingrese su ID de usuario: ");
+                    String idUsuarioDev = sc.nextLine();
+                    System.out.print("Ingrese el ISBN del libro a devolver: ");
+                    String isbnDev = sc.nextLine();
+                    if (biblioteca.devolverLibro(idUsuarioDev, isbnDev) == true){
+                        System.out.println("Devolución exitosa.");
+                    } else {
+                        System.out.println("No se pudo procesar la devolución. Verifique datos.");
+                    }
+
+                    break;
+
+                case 4: 
+
+                    System.out.println("Saliendo del sistema...");
+
+                    break;
+
+                default: 
+                
+                System.out.println("Opción no válida. Intente de nuevo.");
+
+                break;
+            }
+
+        } while (opcion != 4);
+
+    sc.close();
+
     }
 
     static class Libro{  
@@ -53,11 +132,11 @@ public class avance{
                     ", disponible=" + disponible +
                     '}';
 
-        // ...
-
         }
+        // ...
+    }
 
-        static class Usuario{
+    static class Usuario{
 
             private String idUsuario;
             private String nombre;
@@ -88,7 +167,7 @@ public class avance{
 
         public void setIdUsuario(String idUsuario) {this.idUsuario = idUsuario; }
         public void setNombre(String nombre) { this.nombre = nombre;}
-        public void setLIBROSpRESTADOS (ArrayList<Libro> librosPrestados) {this.librosPrestados = librosPrestados; }
+        public void setLibrosPrestados (ArrayList<Libro> librosPrestados) {this.librosPrestados = librosPrestados; }
 
         //metodo ToString
         @Override 
@@ -100,8 +179,9 @@ public class avance{
         }
 
         // ...
+    }
 
-        static class Prestamo{
+    static class Prestamo{
 
             private String idUsuario;
             private String isbn;
@@ -150,7 +230,7 @@ public class avance{
 
         }
 
-        static class Sistema{
+    static class Sistema{
 
             private ArrayList<Libro> listaLibros;
             private ArrayList<Usuario> listaUsuarios;
@@ -308,16 +388,72 @@ public class avance{
             }
 
         }
+    }
 
+    public static void testeo(Sistema biblioteca){
+            // PRUEBA DE VALIDACIÓN: Intentar prestar un libro NO DISPONIBLE
+    // El libro "Interestellar" (ISBN 1234567890) ya está prestado por U001
+
+    String isbnPrestado = "1234567890"; 
+    String idUsuarioNuevo = "U003"; //Daniel 
+    
+    // Primero, agregamos un usuario de prueba (si no existe)
+        if (biblioteca.buscarUsuario(idUsuarioNuevo) == null) {
+        biblioteca.agregarUsuario(new Usuario(idUsuarioNuevo, "Daniel", new ArrayList<>()));
+        }
+    
+    boolean prestamoFallido = biblioteca.prestarLibro(idUsuarioNuevo, isbnPrestado);
+    
+         if (prestamoFallido == false) {
+        System.out.println(" PRUEBA EXITOSA: El Libro (" + isbnPrestado + ") NO se prestó porque ya está en uso.");
+        } else {
+        System.out.println("ERROR: El libro se prestó cuando no debía.");
+         }
+    
+    // PRUEBA DE DEVOLUCIÓN: Actualizar el estado del libro y del préstamo
+    
+    String idUsuarioDevuelve = "U001"; // Camilo devuelve Interestellar
+    
+    System.out.println("PRUEBA DE DEVOLUCIÓN: Libro " + isbnPrestado);
+
+    boolean devolucionExitosa = biblioteca.devolverLibro(idUsuarioDevuelve, isbnPrestado);
+    
+         if (devolucionExitosa == true) {
+        System.out.println("DEVOLUCIÓN EXITOSA: Libro devuelto y estado actualizado.");
+        } else {
+        System.out.println("ERROR: No se pudo procesar la devolución.");
+        }
+
+    // Actualiza el estado de los libros
+    System.out.println("\n--> ESTADO DE LIBROS DESPUÉS DE LA DEVOLUCIÓN ");
+    biblioteca.mostrarLibros();
+
+    // PRUEBA DE PRÉSTAMO EXITOSO: Usar el libro que acaba de ser devuelto
+
+    System.out.println("PRUEBA DE NUEVO PRÉSTAMO: A Daniel ");
+    
+    boolean prestamoExitoso = biblioteca.prestarLibro(idUsuarioNuevo, isbnPrestado);
+    
+        if (prestamoExitoso == true) {
+        System.out.println(" PRÉSTAMO EXITOSO: Libro prestado al usuario " + idUsuarioNuevo);
+        } else {
+        System.out.println(" ERROR: El libro debería haberse prestado.");
+        }
+    
+    // Mostrar el estado final del sistema
+    System.out.println("\n--> ESTADO FINAL DE PRÉSTAMOS ACTIVOS ");
+    // Ahora debe mostrar: el original de U002 y el nuevo de U003 (el de U001 ya no)
+    biblioteca.mostrarPrestamosActivos();
     }
 
     }
 
+    
 
 
 
 
 
 
-    }
-}
+
+    
