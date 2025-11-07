@@ -32,13 +32,11 @@ public class Empleado extends Persona {
     }
 
     public Transaccion depositar(Cliente cliente, Cuenta cuenta, double monto) {
-
-        return null;
+        return cuenta.depositar(monto, this, cliente);
     }
 
     public Transaccion retirar(Cliente cliente, Cuenta cuenta, double monto) {
-
-        return null;
+        return cuenta.retirar(monto, this, cliente);
     }
 
     public void crearCuenta(Cliente cliente, Cuenta cuenta, SistemaBancario banco) {

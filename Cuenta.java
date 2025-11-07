@@ -18,14 +18,26 @@ public class Cuenta {
         this.titulares = new ArrayList<>();
     }
 
-    public Transaccion depositar(double monto) {
-
-        return null;
+    public Transaccion depositar(double monto, Empleado empleado, Cliente cliente) {
+        Deposito deposito = new Deposito(estado, monto, tipo, this, empleado, cliente, tipo);
+        if (!deposito.validarMonto()){
+            System.out.println("No se pudo realizar el deposito: monto invalido");
+            return null;
+        }
+        deposito.actualizarCuenta();
+        agregarTransaccion(deposito);
+        return deposito;
     }
 
-    public Transaccion retirar(double monto) {
-
-        return null;
+    public Transaccion retirar(double monto, Empleado empleado, Cliente cliente) {
+        Retiro retiro = new Retiro(estado, monto, tipo, this, empleado, cliente, tipo);
+        if (!retiro.validarSaldo()){
+            System.out.println("No se pudo realizar el retiro: saldo insuficiente o monto invalido");
+            return null;
+        }
+        retiro.actualizarCuenta();
+        agregarTransaccion(retiro);
+        return retiro;
     }
 
     public String consultarSaldo() {

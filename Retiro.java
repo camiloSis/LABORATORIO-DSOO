@@ -11,6 +11,7 @@ public class Retiro extends Transaccion {
     public Transaccion actualizarCuenta (){
         double nuevoSaldo = cuenta.getSaldo() - monto;
         cuenta.setSaldo(nuevoSaldo);
+        estadoTransaccion = true;
         return this; 
     }
 }
