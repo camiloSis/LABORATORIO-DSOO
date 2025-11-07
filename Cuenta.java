@@ -28,36 +28,37 @@ public class Cuenta {
         return null;
     }
 
-    public double consultarSaldo() {
-
-        return 0.0;
+    public String consultarSaldo() {
+        return String.valueOf(saldo); //muestra el saldo
     }
 
     public void agregarTitular(Cliente titular) {
-
+        titulares.add(titular);
     }
 
     public Transaccion agregarTransaccion(Transaccion transaccion) {
-
-        return null;
+        transacciones.add(transaccion);
+        return transaccion;
     }
 
     public List<Cliente> mostrarTitulares() {
-
-        return null;
+        return titulares;
     }
 
     public List<Transaccion> mostrarHistorial() {
-
-        return null;
+        return transacciones;
     }
 
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public String getSaldo() {
-        return String.valueOf(saldo);
+    public double  getSaldo() {
+        return saldo; //acceder al saldo internamente
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo; //set agregado para actualizar monto
     }
 
     @Override

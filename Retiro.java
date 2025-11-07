@@ -5,12 +5,12 @@ public class Retiro extends Transaccion {
     }
 
     public boolean validarSaldo (){
-        return true; // el metodo debe retornar algo, por eso le puse como ejemplo true, no sé si será el indicado 
-
+        return monto > 0 && monto <= cuenta.getSaldo(); // el metodo debe retornar algo, por eso le puse como ejemplo true, no sé si será el indicado 
     }
 
     public Transaccion actualizarCuenta (){
-        return null; 
-
+        double nuevoSaldo = cuenta.getSaldo() - monto;
+        cuenta.setSaldo(nuevoSaldo);
+        return this; 
     }
 }

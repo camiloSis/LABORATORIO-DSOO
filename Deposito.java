@@ -5,12 +5,12 @@ public class Deposito extends Transaccion {
     }
 
     public boolean validarMonto (){
-        return false;
-
+        return monto>0;
     }
 
     public Transaccion actualizarCuenta (){
-        return null;
-        
+        double nuevoSaldo = cuenta.getSaldo() + monto;
+        cuenta.setSaldo(nuevoSaldo);
+        return this;
     }
 }

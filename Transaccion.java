@@ -23,13 +23,14 @@ public class Transaccion {
     }
 
     public Transaccion ejecutar() {
-
-        return null;
+        System.out.println("Ejecutando transaccion...");
+        estadoTransaccion = true;
+        return this;
     }
 
     public String mostrarDetalles() {
- 
-        return null;
+        return "Transacción " + tipo + " | Monto: " + monto + 
+               " | Fecha: " + fecha + " | Estado: " + (estadoTransaccion ? "Exitosa" : "Fallida");
     }
 
     @Override
@@ -40,9 +41,9 @@ public class Transaccion {
                 ", monto=" + monto +
                 ", tipo='" + tipo + '\'' +
                 ", cuenta=" + cuenta.getNumeroCuenta() +
-                ", cliente=" + cliente.getNombre() +
-                ", empleado=" + empleado.getNombre() +
-                ", estado=" + estadoTransaccion +
+                ", cliente=" + (cliente != null ? cliente.getNombre() : "N/A") +
+                ", empleado=" + (cuenta != null ? cuenta.getNumeroCuenta() : "N/A") +
+                ", estado=" + (estadoTransaccion ? "Exitosa" : "Fallida") +
                 '}';
     }
 }
