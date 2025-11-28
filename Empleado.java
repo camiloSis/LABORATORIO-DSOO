@@ -11,7 +11,7 @@ class Empleado extends Persona {
         this.cargo = cargo.toUpperCase();
     }
 
-    public Empleado() {}
+    public Empleado() {super();}
 
     public String getIdEmpleado() { return idEmpleado; }
     public String getCargo() { return cargo; }
@@ -26,9 +26,10 @@ class Empleado extends Persona {
         return cuenta.retirar(monto, this, cliente);
     }
 
-        // Registrar un nuevo cliente
+    // CAMBIO: Registrar un nuevo cliente usando Scanner compartido
     public void registrarCliente(Empleado empAtiende) {
-        Scanner sc = new Scanner(System.in);
+        // CAMBIO: usar Main.getScanner() en lugar de new Scanner(System.in)
+        Scanner sc = Main.getScanner();
         SistemaBancario banco = Main.getBanco();
 
         System.out.println("\n=== REGISTRO DE NUEVO CLIENTE ===");
@@ -39,21 +40,42 @@ class Empleado extends Persona {
         String nombre;
         do { 
             System.out.print(empAtiende.getNombre() + ": ¿Cuál es su nombre? ");
-            nombre = sc.nextLine().trim().toUpperCase();
-        } while (!nuevoCliente.setNombre(nombre));
+            nombre = sc.nextLine().trim();
+
+            // CAMBIO: validar que nombre solo contenga letras
+            if (!Validador.esSoloLetrasNombre(nombre)) {
+                System.out.println("Nombre inválido. Use solo letras, espacios, guiones o apóstrofes.");
+                nombre = null;
+                continue;
+            }
+        } while (nombre == null || !nuevoCliente.setNombre(nombre));
 
         // Apellido
         String apellido;
         do { 
             System.out.print(empAtiende.getNombre() + ": ¿Y su apellido? ");
-            apellido = sc.nextLine().trim().toUpperCase();
-        } while (!nuevoCliente.setApellido(apellido));
+            apellido = sc.nextLine().trim();
+
+            // CAMBIO: validar que apellido solo contenga letras
+            if (!Validador.esSoloLetrasNombre(apellido)) {
+                System.out.println("Apellido inválido. Use solo letras, espacios, guiones o apóstrofes.");
+                apellido = null;
+                continue;
+            }
+        } while (apellido == null || !nuevoCliente.setApellido(apellido));
 
         // DNI
         String dni;
         do { 
             System.out.print(empAtiende.getNombre() + ": ¿Su DNI? ");
             dni = sc.nextLine().trim();
+
+            // CAMBIO: validar que el DNI tenga exactamente 8 dígitos numéricos
+            if (dni == null || !dni.matches("\\d{8}")) {
+                System.out.println("DNI inválido. Debe contener exactamente 8 dígitos numéricos.");
+                dni = null;
+                continue;
+            }
 
             if (Persona.buscarPersonaPorDni(dni) != null) {
                 System.out.println("\nYa existe una persona con ese DNI. Registro cancelado.");
@@ -64,12 +86,23 @@ class Empleado extends Persona {
         // Telefono
         String telefono;
         do { 
-            System.out.print(empAtiende.getNombre() + ": ¿Su teléfono (9 dígitos)? ");
+            System.out.print(empAtiende.getNombre() + ": ¿Su teléfono? ");
             telefono = sc.nextLine().trim();
+
+            // CAMBIO: normalizar quitando espacios y validar 9 dígitos
+            String telefonoDigits = telefono.replaceAll("\\D", "");
+
+            if (telefonoDigits == null || !telefonoDigits.matches("\\d{9}")) {
+                System.out.println("Teléfono inválido. Debe contener exactamente 9 dígitos numéricos (puede incluir espacios o guiones).");
+                telefono = null;
+                continue;
+            }
             
-            if (Persona.buscarPersonaPorTelefono(telefono) != null) {
+            if (Persona.buscarPersonaPorTelefono(telefonoDigits) != null) {
                 System.out.println("\nYa existe una persona con ese TELEFONO. Registro cancelado.");
                 telefono = null;
+            } else {
+                telefono = telefonoDigits;
             }
         } while (telefono == null || !nuevoCliente.setTelefono(telefono));
 
@@ -124,6 +157,7 @@ class Empleado extends Persona {
 
         System.out.println("\nCliente registrado con éxito.");
         System.out.println("ID Cliente: " + idCliente);
+        // CAMBIO: NO cerrar el Scanner aquí
     }
 
     @Override

@@ -39,6 +39,8 @@ public abstract class Persona {
         return null;
     }
 
+    
+
     public static Persona buscarPersonaPorTelefono (String telefono) {
         for (Persona p : personasRegistradas) {
             if (p.getTelefono().equals(telefono)) return p;
@@ -63,14 +65,18 @@ public abstract class Persona {
     // Setters con validacion
         // Nombre
     public boolean setNombre(String nombre) {
-        if (!Validador.esSoloLetras(nombre) || nombre.length() < 3 || nombre.length() > 16) return false;
-        this.nombre = nombre.toUpperCase();
+        if (nombre == null) return false;
+        nombre = nombre.trim();
+        if (!Validador.esSoloLetrasNombre(nombre)) return false;
+        this.nombre = nombre;
         return true;
     }
-        // Apellido
+
     public boolean setApellido(String apellido) {
-        if (!Validador.esSoloLetras(apellido) || apellido.length() < 3 || apellido.length() > 21) return false;
-        this.apellido = apellido.toUpperCase();
+        if (apellido == null) return false;
+        apellido = apellido.trim();
+        if (!Validador.esSoloLetrasNombre(apellido)) return false;
+        this.apellido = apellido;
         return true;
     }
         // DNI
@@ -116,7 +122,7 @@ public abstract class Persona {
     public String getTelefono() { return telefono; }
     public String getCorreo() { return correo; }
     public String getDireccion() { return direccion; }
-
+    
     public abstract void mostrarMenu();
 
     @Override

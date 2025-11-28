@@ -5,6 +5,11 @@ class Validador {
     public static boolean esSoloLetras(String s) {
         return s.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); // True
     }
+    // Verifica que el String contenga solo letras, espacios, guiones y apóstrofes (para nombres)
+    public static boolean esSoloLetrasNombre(String texto) {
+        if (texto == null) return false;
+        return texto.trim().matches("[A-Za-zÁÉÍÓÚáéíóúÑñ\\s\\-']+");
+    }
 
     // Verifica que el String contenga solo numeros
     public static boolean esSoloNumeros(String s) {

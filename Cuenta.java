@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +81,8 @@ class Cuenta {
     public ArrayList<Transaccion> mostrarHistorial() { return transacciones; }
     public String getNumeroCuenta() { return numeroCuenta; }
     public double getSaldo() { return saldo; }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
     public void setSaldo(double saldo) { this.saldo = saldo; }
 
     @Override
