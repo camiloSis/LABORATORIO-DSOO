@@ -69,7 +69,7 @@ public abstract class Persona {
         if (nombre == null) return false;
         nombre = nombre.trim();
         if (!Validador.esSoloLetrasNombre(nombre)) return false;
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
         return true;
     }
 
@@ -77,7 +77,7 @@ public abstract class Persona {
         if (apellido == null) return false;
         apellido = apellido.trim();
         if (!Validador.esSoloLetrasNombre(apellido)) return false;
-        this.apellido = apellido;
+        this.apellido = apellido.toUpperCase();
         return true;
     }
         // DNI
@@ -125,6 +125,7 @@ public abstract class Persona {
     public String getDireccion() { return direccion; }
     
     public abstract void mostrarMenu();
+    public abstract void mostrarMenuGUI();;
 
     @Override
     public String toString() {

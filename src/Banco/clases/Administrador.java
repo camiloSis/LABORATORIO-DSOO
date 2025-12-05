@@ -1,6 +1,8 @@
 
 package Banco.clases;
+import Banco.vista.MenuAdministradorGUI;
 import java.util.Scanner;
+
 /*
  CAMBIO: Administrador ahora extiende Empleado (no Persona).
  Esto permite registrar administradores en mapaEmpleados (Map<String, Empleado>)
@@ -200,5 +202,10 @@ public class Administrador extends Empleado {
     @Override
     public String toString() {
         return super.toString() + " | ADMIN | nivel:" + nivelAcceso;
+    }
+
+    @Override
+    public void mostrarMenuGUI() {
+        new MenuAdministradorGUI(this).setVisible(true);
     }
 }

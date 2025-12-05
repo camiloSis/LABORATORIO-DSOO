@@ -1,7 +1,7 @@
 
 package Banco.clases;
 
-class Deposito extends Transaccion {
+public class Deposito extends Transaccion {
     public Deposito(String idTransaccion, double monto, String tipo,
                     Cuenta cuenta, Empleado empleado, Cliente cliente, String fecha) {
         super(idTransaccion, monto, tipo, cuenta, empleado, cliente, fecha);

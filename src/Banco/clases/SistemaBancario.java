@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-class SistemaBancario {
+public class SistemaBancario {
     private Map<String, Cuenta> mapaCuentas;
     private Map<String, Cliente> mapaClientes;
     private Map<String, Empleado> mapaEmpleados;
@@ -23,13 +23,13 @@ class SistemaBancario {
         this.mapaEmpleados = new HashMap<>();
 
         // empleados iniciales
-        Empleado cajeroPrincipal = new Empleado("Luis", "Gómez", "72846315", "958431276", "luis@mail.com", "Av. Libertad 123", "EMP-001", "Cajero", "lgomez", "Lgomez@2025!");
-        Administrador adminSucursal = new Administrador("Ana", "Martínez", "49302784", "994205318", "ana@mail.com", "Calle Central 45", "EMP-002", "Administrador", "amartinez", "Amartinez#2025");
+        Empleado cajeroPrincipal = new Empleado("Luis", "Gómez", "72846315", "958431276", "luis@mail.com", "Av. Libertad 123", "EMP-001", "Cajero", "321", "321");
+        Administrador adminSucursal = new Administrador("Ana", "Martínez", "49302784", "994205318", "ana@mail.com", "Calle Central 45", "ADM-002", "Administrador", "2025", "2025");
         registrarEmpleado(cajeroPrincipal);
         registrarEmpleado(adminSucursal);
 
         // clientes iniciales
-        Cliente clienteDina = new Cliente("Dina", "Boluarte", "74120589", "977412589", "dina.boluarte@gmail.com", "Av. Perú 100", "CLI-0001", new ArrayList<>(), "dina_bolua", "Dina!2025#");
+        Cliente clienteDina = new Cliente("Dina", "Boluarte", "74120589", "977412589", "dina.boluarte@gmail.com", "Av. Perú 100", "CLI-0001", new ArrayList<>(), "123", "123");
         Cliente clienteJose = new Cliente("Jose", "Jeri", "61908347", "962190347", "jose.jeri@gmail.com", "Calle Lima 200", "CLI-0002", new ArrayList<>(), "jeri_jose", "Jeri@Dev#98");
         Cliente clientePedro = new Cliente("Pedro", "Castillo", "58320714", "985832714", "pedro.castillo@gmail.com", "Calle Norte 300", "CLI-0003", new ArrayList<>(), "pedro_cast", "Pcastle2025!%");
         registrarCliente(clienteDina);
@@ -174,7 +174,18 @@ class SistemaBancario {
         }
         return totalFondos;
     }
+    
+    public Map<String, Cliente> getMapaClientes() {
+        return mapaClientes;
+    }
+    
+    public Map<String, Empleado> getMapaEmpleado() {
+        return mapaEmpleados;
+    }
 
+    public Map<String, Cuenta> getMapaCuenta() {
+        return mapaCuentas;
+    }
     public void contratarEmpleado(Empleado empAtiende) {
         // CAMBIO: usar Main.getScanner() en lugar de Scanner local
         SistemaBancario banco = Main.getBanco();

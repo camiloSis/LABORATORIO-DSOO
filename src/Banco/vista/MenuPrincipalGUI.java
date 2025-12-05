@@ -1,13 +1,15 @@
 
 package Banco.vista;
 
+import Banco.clases.Main;
+
 public class MenuPrincipalGUI extends javax.swing.JFrame {
 
     public MenuPrincipalGUI() {
-        initComponents();
+        initComponents();    
         setLocationRelativeTo(null);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -118,7 +120,8 @@ public class MenuPrincipalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarEmpleadoActionPerformed
 
     private void btnDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatosActionPerformed
-        
+            DatosGUI datos = new DatosGUI(Main.getBanco());
+            datos.setVisible(true);
     }//GEN-LAST:event_btnDatosActionPerformed
 
     public static void main(String args[]) {
@@ -139,13 +142,6 @@ public class MenuPrincipalGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MenuPrincipalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuPrincipalGUI().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

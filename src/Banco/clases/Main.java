@@ -2,6 +2,7 @@
 package Banco.clases;
 
 import java.util.*;
+import javax.swing.*;
 
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
@@ -143,5 +144,73 @@ public class Main {
         } while (empleadoAtiende == null);
 
         return empleadoAtiende;
+    }
+    public static Empleado elegirEmpleadoAtencionGUI() {
+        // Obtener el banco
+        SistemaBancario banco = getBanco();
+
+        // Obtener solo empleados cajeros (o todos los empleados si así lo deseas)
+        java.util.List<Empleado> empleados = banco.listarEmpleados();
+
+        if (empleados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay empleados registrados.");
+            return null;
+        }
+
+        // Crear un arreglo de nombres para mostrar en JOptionPane
+        String[] nombres = new String[empleados.size()];
+        for (int i = 0; i < empleados.size(); i++) {
+            nombres[i] = empleados.get(i).getNombre() + " - " + empleados.get(i).getCargo();
+        }
+
+        // Mostrar cuadro de selección
+        String seleccion = (String) JOptionPane.showInputDialog(
+                null,
+                "Seleccione un empleado:",
+                "Elegir Cajero",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                nombres,
+                nombres[0]
+        );
+
+        // Si canceló o cerró la ventana
+        if (seleccion == null) return null;
+
+        // Buscar el empleado seleccionado
+        for (int i = 0; i < empleados.size(); i++) {
+            if (nombres[i].equals(seleccion)) {
+                return empleados.get(i);
+            }
+        }
+
+        return null; // debería ser imposible, pero por seguridad
+    }
+    
+    public static String elegirTipoGUI() {
+        // Lista de tipos válidos
+        java.util.List<String> tipos = java.util.Arrays.asList("AHORROS", "CORRIENTE");
+
+        // Convertir lista a arreglo para mostrar en JOptionPane
+        String[] opciones = tipos.toArray(new String[0]);
+
+        // Mostrar cuadro de selección
+        String seleccion = (String) JOptionPane.showInputDialog(
+                null,
+                "Seleccione el tipo de cuenta:",
+                "Elegir Tipo",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]
+        );
+
+        // Si canceló o cerró ventana → retornar null
+        if (seleccion == null) {
+            return null;
+        }
+
+        // Retornar el tipo seleccionado (ya válido)
+        return seleccion;
     }
 }

@@ -2,7 +2,10 @@
 package Banco.clases;
 import java.util.ArrayList;
 
-class Cliente extends Persona {
+import Banco.vista.MenuCajeroGUI;
+import Banco.vista.MenuClienteGUI;
+
+public class Cliente extends Persona {
     private String idCliente;
     private ArrayList<Cuenta> cuentas;
 
@@ -34,5 +37,10 @@ class Cliente extends Persona {
     @Override
     public String toString() {
         return "Cliente{" + super.toString() + " | idCliente=" + idCliente + "}";
+    }
+
+    @Override
+    public void mostrarMenuGUI() {
+        new MenuClienteGUI(this).setVisible(true);
     }
 }

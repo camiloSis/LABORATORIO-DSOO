@@ -4,7 +4,7 @@ package Banco.clases;
 import java.util.ArrayList;
 import java.util.List;
 
-class Cuenta {
+public class Cuenta {
     private String numeroCuenta;
     private String tipo;
     private double saldo;

@@ -1,22 +1,25 @@
-
 package Banco.vista;
+
+import Banco.clases.*;
+import javax.swing.*;
 
 public class RegistrarEmpleadoGUI extends javax.swing.JFrame {
 
+    SistemaBancario banco = Main.getBanco();
     public RegistrarEmpleadoGUI() {
         initComponents();
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cargarEmpleados();
+        cmbEmpleado.addActionListener(e -> actualizarLabelsEmpleado());
+        btnRegistrar.addActionListener(e -> registrarEmpleadoGUI());
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jPanel1 = new javax.swing.JPanel();
-        lblTitulo = new javax.swing.JLabel();
+        jlTitulo = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtDni = new javax.swing.JTextField();
@@ -24,7 +27,7 @@ public class RegistrarEmpleadoGUI extends javax.swing.JFrame {
         cmbEmpleado = new javax.swing.JComboBox<>();
         jlSelecEmp = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
+        txtContrasena = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         jlNombre = new javax.swing.JLabel();
         jlApellido = new javax.swing.JLabel();
@@ -33,85 +36,34 @@ public class RegistrarEmpleadoGUI extends javax.swing.JFrame {
         jlUsuario = new javax.swing.JLabel();
         jlDireccion = new javax.swing.JLabel();
         jlContraseña = new javax.swing.JLabel();
-        btnRegistroComppletoCli = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        txtCorreo = new javax.swing.JLabel();
-
-        jMenu1.setText("jMenu1");
-
-        jMenu2.setText("jMenu2");
-
-        jMenu3.setText("jMenu3");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        btnRegistrar = new javax.swing.JButton();
+        jlCorreo = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        jlCargo = new javax.swing.JLabel();
+        cmbCargo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Registrar Cliente");
-        setPreferredSize(new java.awt.Dimension(318, 599));
+        setTitle("Registrar Empleado");
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitulo.setText("REGISTRAR EMPLEADO");
+        jlTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24));
+        jlTitulo.setText("REGISTRAR EMPLEADO");
 
-        txtNombre.setToolTipText("nombre");
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-
-        txtDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDniActionPerformed(evt);
-            }
-        });
-
-        cmbEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pepe", "Juan", "Sara", "Maria" }));
-
-        jlSelecEmp.setText("Seleccionar Empleado: ");
-
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
+        jlSelecEmp.setText("Seleccionar Entrevistador   : ");
 
         jlNombre.setText("Nombre:");
-
         jlApellido.setText("Apellido:");
-
         jlDni.setText("DNI:");
-
         jlTelefono.setText("Telefono:");
-
         jlUsuario.setText("Usuario:");
-
         jlDireccion.setText("Direccion:");
-
         jlContraseña.setText("Contraseña:");
+        jlCorreo.setText("Correo:");
+        jlCargo.setText("Cargo:");
 
-        btnRegistroComppletoCli.setText("Registrar");
-        btnRegistroComppletoCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistroComppletoCliActionPerformed(evt);
-            }
-        });
+        btnRegistrar.setText("Registrar");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        txtCorreo.setText("Correo:");
+        // Combo de cargos
+        cmbCargo.setModel(new DefaultComboBoxModel<>(new String[]{"CAJERO", "ADMINISTRADOR"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,47 +72,49 @@ public class RegistrarEmpleadoGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDireccion)
-                    .addComponent(jTextField1)
-                    .addComponent(txtNombre)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtDni)
-                    .addComponent(txtApellido)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlSelecEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtUsuario)
-                    .addComponent(txtContraseña)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlTitulo)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlDni, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTitulo)
-                            .addComponent(jlApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(25, 25, 25))
+                            .addComponent(txtTelefono)
+                            .addComponent(txtDni)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jlSelecEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtApellido)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtDireccion)
+                            .addComponent(txtUsuario)
+                            .addComponent(txtContrasena)
+                            .addComponent(jlTelefono)
+                            .addComponent(jlCorreo)
+                            .addComponent(jlDni)
+                            .addComponent(jlApellido)
+                            .addComponent(jlNombre)
+                            .addComponent(jlContraseña)
+                            .addComponent(jlUsuario)
+                            .addComponent(jlDireccion)
+                            .addComponent(jlCargo)
+                            .addComponent(cmbCargo))
+                        .addGap(25, 25, 25))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(btnRegistroComppletoCli, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(99, 99, 99)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(lblTitulo)
+                .addComponent(jlTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlSelecEmp)
-                    .addComponent(cmbEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cmbEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlSelecEmp))
+                .addGap(13, 13, 13)
                 .addComponent(jlNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,13 +127,13 @@ public class RegistrarEmpleadoGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCorreo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlTelefono)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCorreo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlDireccion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -191,34 +145,18 @@ public class RegistrarEmpleadoGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlContraseña)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCargo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegistroComppletoCli, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDniActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
-
-    private void btnRegistroComppletoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroComppletoCliActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistroComppletoCliActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        setBounds(0, 0, 341, 622); // un poco más alto por el combo de cargo
+    }// </editor-fold>     
 
     /**
      * @param args the command line arguments
@@ -241,39 +179,126 @@ public class RegistrarEmpleadoGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(RegistrarEmpleadoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistrarEmpleadoGUI().setVisible(true);
-            }
-        });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegistroComppletoCli;
-    private javax.swing.JComboBox<String> cmbEmpleado;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel jlApellido;
-    private javax.swing.JLabel jlContraseña;
-    private javax.swing.JLabel jlDireccion;
-    private javax.swing.JLabel jlDni;
-    private javax.swing.JLabel jlNombre;
-    private javax.swing.JLabel jlSelecEmp;
-    private javax.swing.JLabel jlTelefono;
-    private javax.swing.JLabel jlUsuario;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtContraseña;
-    private javax.swing.JLabel txtCorreo;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtUsuario;
-    // End of variables declaration//GEN-END:variables
+    private void registrarEmpleadoGUI() {
+
+        String nombre = txtNombre.getText().trim();
+        String apellido = txtApellido.getText().trim();
+        String dni = txtDni.getText().trim();
+        String correo = txtCorreo.getText().trim();
+        String telefono = txtTelefono.getText().trim();
+        String direccion = txtDireccion.getText().trim();
+        String usuario = txtUsuario.getText().trim();
+        String contrasena = txtContrasena.getText().trim();
+        String cargo = (String) cmbCargo.getSelectedItem(); // NUEVO: cargo
+
+        // VALIDACIONES 
+        if (!Validador.esSoloLetrasNombre(nombre)) {
+            JOptionPane.showMessageDialog(this, "Nombre inválido.");
+            return;
+        }
+        if (!Validador.esSoloLetrasNombre(apellido)) {
+            JOptionPane.showMessageDialog(this, "Apellido inválido.");
+            return;
+        }
+        if (!Validador.esDniValido(dni) || Persona.buscarPersonaPorDni(dni) != null) {
+            JOptionPane.showMessageDialog(this, "DNI inválido o ya registrado.");
+            return;
+        }
+        if (!Validador.esCorreoValido(correo) || Persona.buscarPersonaPorCorreo(correo) != null) {
+            JOptionPane.showMessageDialog(this, "Correo inválido o ya registrado.");
+            return;
+        }
+        if (!Validador.esTelefonoValido(telefono) || Persona.buscarPersonaPorTelefono(telefono) != null) {
+            JOptionPane.showMessageDialog(this, "Teléfono inválido o ya registrado.");
+            return;
+        }
+        if (usuario.isEmpty() || Persona.buscarPersonaPorUsuario(usuario) != null) {
+            JOptionPane.showMessageDialog(this, "Usuario vacío o ya en uso.");
+            return;
+        }
+        if (contrasena.length() < 4) {
+            JOptionPane.showMessageDialog(this, "Contraseña debe tener al menos 4 caracteres.");
+            return;
+        }
+
+        // CREAR EMPLEADO
+        Empleado nuevo = new Empleado();
+        nuevo.setNombre(nombre);
+        nuevo.setApellido(apellido);
+        nuevo.setDni(dni);
+        nuevo.setCorreo(correo);
+        nuevo.setTelefono(telefono);
+        nuevo.setDireccion(direccion);
+        nuevo.setUsuario(usuario);
+        nuevo.setContrasena(contrasena);
+        nuevo.setCargo(cargo); // asignar cargo
+
+        String idGenerado = banco.generarIdEmpleado();
+        nuevo.setIdEmpleado(idGenerado);
+
+        banco.registrarEmpleado(nuevo);
+        Persona.getPersonasRegistradas().add(nuevo);
+
+        JOptionPane.showMessageDialog(this, "Empleado registrado con éxito.\nID asignado: " + idGenerado);
+
+        // LIMPIAR CAMPOS
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtDni.setText("");
+        txtCorreo.setText("");
+        txtTelefono.setText("");
+        txtDireccion.setText("");
+        txtUsuario.setText("");
+        txtContrasena.setText("");
+        cmbCargo.setSelectedIndex(0); // reinicia combo de cargo
+    }
+
+    private void cargarEmpleados() {
+        SistemaBancario banco = Main.getBanco();
+        DefaultComboBoxModel<Empleado> modelo = new DefaultComboBoxModel<>();
+
+        for (Empleado emp : banco.listarEmpleados()) {
+            modelo.addElement(emp);
+        }
+
+        cmbEmpleado.setModel(modelo);
+
+        cmbEmpleado.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(
+                    JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Empleado emp) {
+                    setText(emp.getNombre());
+                }
+                return this;
+            }
+        });
+        actualizarLabelsEmpleado();
+    }
+
+    private void actualizarLabelsEmpleado() {
+        Empleado emp = (Empleado) cmbEmpleado.getSelectedItem();
+        if (emp != null) {
+            String nombreEmpleado = emp.getNombre();
+            jlNombre.setText(nombreEmpleado + ": ¿Cuál es su nombre?");
+            jlApellido.setText(nombreEmpleado + ": ¿Cuál es su apellido?");
+            jlDni.setText(nombreEmpleado + ": ¿Cuál es su DNI?");
+            jlTelefono.setText(nombreEmpleado + ": ¿Cuál es su teléfono?");
+            jlCorreo.setText(nombreEmpleado + ": ¿Cuál es su correo?");
+            jlDireccion.setText(nombreEmpleado + ": ¿Cuál es su dirección?");
+            jlUsuario.setText(nombreEmpleado + ": ¿Cuál es su usuario?");
+            jlContraseña.setText(nombreEmpleado + ": ¿Cuál es su contraseña?");
+        }
+    }
+
+    // Variables declaration
+    public javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<Empleado> cmbEmpleado;
+    private javax.swing.JComboBox<String> cmbCargo; // NUEVO combo de cargos
+    private javax.swing.JLabel jlApellido, jlContraseña, jlCorreo, jlDireccion, jlDni, jlNombre,
+            jlSelecEmp, jlTelefono, jlTitulo, jlUsuario, jlCargo;
+    private javax.swing.JTextField txtApellido, txtContrasena, txtCorreo, txtDireccion, txtDni, txtNombre, txtTelefono, txtUsuario;
 }

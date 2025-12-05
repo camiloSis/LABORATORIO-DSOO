@@ -3,14 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/vista/RegistrarEmpleadoGUI.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/vista/RegistrarClienteGUI.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/clases/SistemaBancario.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/vista/MenuPrincipalGUI.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/vista/IniciarSesionGUI.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/vista/MenuCajeroGUI.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/vista/MenuClienteGUI.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Documentos/NetBeansProjects/Proyecto_Banco/src/Banco/clases/Cliente.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/MenuAdministradorGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/MenuCajeroGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/MenuClienteGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/IniciarSesionGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/MenuPrincipalGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/Empleado.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/DatosGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/RegistrarClienteGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/Main.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/MostrarCuentasGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/SistemaBancario.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/Cliente.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/SeleccionarCuentaGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/MenuCuentaGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/Deposito.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/Operaciones.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/RegistrarEmpleadoGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/vista/HistorialGUI.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/Transaccion.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/Proyecto_Banco/src/Banco/clases/Cuenta.java</file>
         </group>
     </open-files>
 </project-private>

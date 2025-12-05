@@ -1,7 +1,7 @@
 
 package Banco.clases;
 
-class Operaciones {
+public class Operaciones {
     // Constructor simplificado
     public Operaciones() {
         // Constructor vacío

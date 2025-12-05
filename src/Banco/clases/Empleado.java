@@ -1,9 +1,11 @@
 
 package Banco.clases;
 
+import Banco.vista.*;
 import java.util.Scanner;
+import javax.swing.*;
 
-class Empleado extends Persona {
+public class Empleado extends Persona {
     private String idEmpleado;
     private String cargo;
 
@@ -171,5 +173,10 @@ class Empleado extends Persona {
     @Override
     public String toString() {
         return "Empleado{" + super.toString() + " | idEmpleado=" + idEmpleado + " | cargo=" + cargo + "}";
+    }
+
+    @Override
+    public void mostrarMenuGUI() {
+        new MenuCajeroGUI().setVisible(true);
     }
 }

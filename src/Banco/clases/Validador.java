@@ -2,7 +2,7 @@
 package Banco.clases;
 
 // Clase auxiliar para validacion de datos
-class Validador {
+public class Validador {
     // Verifica que el String contenga solo letras
     public static boolean esSoloLetras(String s) {
         return s.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); // True
@@ -39,3 +39,4 @@ class Validador {
         return monto.matches("^[0-9]+(\\.[0-9]{1,2})?$");
     }
 }
+
