@@ -1,4 +1,3 @@
-
 package Banco.clases;
 import Banco.vista.MenuAdministradorGUI;
 import java.util.Scanner;
