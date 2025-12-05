@@ -167,7 +167,8 @@ public class Empleado extends Persona {
 
     @Override
     public void mostrarMenu() {
-        System.out.println("Empleado " + getNombre() + " sin menú definido.");
+        SistemaBancario banco = Main.getBanco();
+        banco.mostrarMenuCajero(this);
     }
 
     @Override
@@ -177,6 +178,6 @@ public class Empleado extends Persona {
 
     @Override
     public void mostrarMenuGUI() {
-        new MenuCajeroGUI().setVisible(true);
+        new MenuCajeroGUI(this).setVisible(true);
     }
 }
